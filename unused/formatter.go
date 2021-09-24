@@ -1,4 +1,4 @@
-package utils
+package unused
 
 import "invest/app/models"
 
@@ -98,7 +98,7 @@ func (f Formatter) FormatCreateUser (user models.User) CreateUserReturn {
 	return formatter
 }
 
-func (f Formatter) FormatFindAllUser (users []models.User) []CreateUserReturn{
+func (f Formatter) FormatFindAllUser (users []models.User) []CreateUserReturn {
 	var finalList []CreateUserReturn
 	for _, user := range users {
 		t := f.FormatCreateUser(user)
@@ -156,7 +156,7 @@ func (f Formatter) FormatCreateCrowdfund (crowdfund models.Crowdfund) CreateCrow
 	return formatter
 }
 
-func (f Formatter) FormatFindAllCrowdfunding (list []models.Crowdfund) []CreateCrowdfundReturn{
+func (f Formatter) FormatFindAllCrowdfunding (list []models.Crowdfund) []CreateCrowdfundReturn {
 	var finalList []CreateCrowdfundReturn
 	for _, item := range list {
 		t := f.FormatCreateCrowdfund(item)
@@ -177,7 +177,7 @@ func (f Formatter) FormatCreateFAQ (faq models.FAQ) CreateFAQReturn {
 	return fr
 }
 
-func (f Formatter) FormatFindAllFAQ (list []models.FAQ) []CreateFAQReturn{
+func (f Formatter) FormatFindAllFAQ (list []models.FAQ) []CreateFAQReturn {
 	var finalList []CreateFAQReturn
 	for _, item := range list {
 		t := f.FormatCreateFAQ(item)
@@ -200,7 +200,7 @@ func (f Formatter) FormatCreateTransparansi (tr models.Transparansi) CreateTrans
 	return fr
 }
 
-func (f Formatter) FormatFindAllTransparansi (list []models.Transparansi) []CreateTransparansiReturn{
+func (f Formatter) FormatFindAllTransparansi (list []models.Transparansi) []CreateTransparansiReturn {
 	var finalList []CreateTransparansiReturn
 	for _, item := range list {
 		t := f.FormatCreateTransparansi(item)
@@ -219,7 +219,7 @@ func (f Formatter) FormatCreateInvestor (inv models.Investor) CreateInvestorRetu
 	return fr
 }
 
-func (f Formatter) FormatFindAllInvestor (list []models.Investor) []CreateInvestorReturn{
+func (f Formatter) FormatFindAllInvestor (list []models.Investor) []CreateInvestorReturn {
 	var finalList []CreateInvestorReturn
 	for _, item := range list {
 		t := f.FormatCreateInvestor(item)
@@ -240,7 +240,7 @@ func (f Formatter) FormatCreateRequestKYC (kyc models.RequestKYC) CreateRequestK
 	return fr
 }
 
-func (f Formatter) FormatFindAllRequestKYC (list []models.RequestKYC) []CreateRequestKYCReturn{
+func (f Formatter) FormatFindAllRequestKYC (list []models.RequestKYC) []CreateRequestKYCReturn {
 	var finalList []CreateRequestKYCReturn
 	for _, item := range list {
 		t := f.FormatCreateRequestKYC(item)

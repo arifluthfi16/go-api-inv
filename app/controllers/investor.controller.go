@@ -4,12 +4,14 @@ import (
 	"github.com/gin-gonic/gin"
 	"invest/app/services"
 	"invest/app/utils"
+	"invest/app/utils/formatter"
 )
 
 type InvestorController struct {}
 
 var InvestorService = services.InvestorService{}
 var CrowdfundingService = services.CrowdfundService{}
+var InvestorFormatter = formatter.InvestorFormatter{}
 
 func (controller *InvestorController) Create(c *gin.Context){
 	var createInvestorInput utils.CreateInvestorInput
@@ -39,7 +41,7 @@ func (controller *InvestorController) Create(c *gin.Context){
 		}); return
 	}
 
-	formattedResponse := Formatter.FormatCreateInvestor(inv)
+	formattedResponse := InvestorFormatter.FormatCreateInvestor(inv)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Successfully created a new investor data",
@@ -56,7 +58,7 @@ func (controller *InvestorController) FindOneById(c *gin.Context) {
 			Err:     err,
 		})
 	}else{
-		formattedResponse := Formatter.FormatCreateInvestor(inv)
+		formattedResponse := InvestorFormatter.FormatCreateInvestor(inv)
 		Response.SendSuccessResponse(utils.SuccessResponseFormat{
 			Context: c,
 			Data:    formattedResponse,
@@ -74,7 +76,7 @@ func (controller *InvestorController) FindAllByCrowdfundId(c *gin.Context) {
 			Err:     err,
 		})
 	}else{
-		formattedResponse := Formatter.FormatFindAllInvestor(list)
+		formattedResponse := InvestorFormatter.FormatFindAllInvestor(list)
 		Response.SendSuccessResponse(utils.SuccessResponseFormat{
 			Context: c,
 			Data:    formattedResponse,
@@ -92,7 +94,7 @@ func (controller *InvestorController) FindAll(c *gin.Context){
 			Err:     err,
 		})
 	}else{
-		formattedResponse := Formatter.FormatFindAllInvestor(list)
+		formattedResponse := InvestorFormatter.FormatFindAllInvestor(list)
 		Response.SendSuccessResponse(utils.SuccessResponseFormat{
 			Context: c,
 			Data:    formattedResponse,
@@ -147,7 +149,7 @@ func (controller *InvestorController) Update(c *gin.Context){
 		}); return
 	}
 
-	formattedResponse := Formatter.FormatCreateInvestor(result)
+	formattedResponse := InvestorFormatter.FormatCreateInvestor(result)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Successfully updated investor data",

@@ -5,9 +5,11 @@ import (
 	"github.com/gin-gonic/gin"
 	Service "invest/app/services"
 	"invest/app/utils"
+	"invest/app/utils/formatter"
 )
 
 var UserService = Service.UserService{}
+var UserFormatter = formatter.UserFormatter{}
 
 func CreateUser(c *gin.Context) {
 	fmt.Println("Creating User")
@@ -25,7 +27,7 @@ func CreateUser(c *gin.Context) {
 		return
 	}
 
-	formatted := Formatter.FormatCreateUser(user)
+	formatted := UserFormatter.FormatCreateUser(user)
 	payload := Response.APIResponse("Succesfully created a new user", formatted)
 	Response.HandleSuccessRequest(c, payload)
 	return
@@ -37,7 +39,7 @@ func FindUserById(c *gin.Context){
 		FormattedErr := Response.APIResponseError("Failed to find user", err)
 		Response.HandleFailedRequest(c, FormattedErr)
 	}else{
-		UserData := Formatter.FormatCreateUser(user)
+		UserData := UserFormatter.FormatCreateUser(user)
 		Return := Response.APIResponse("Succeed finding all user", UserData)
 		Response.HandleSuccessRequest(c, Return)
 	}
@@ -50,7 +52,7 @@ func FindAllUser(c *gin.Context){
 		FormattedErr := Response.APIResponseError("Failed to find user", err)
 		Response.HandleFailedRequest(c, FormattedErr)
 	}else{
-		UsersData := Formatter.FormatFindAllUser(users)
+		UsersData := UserFormatter.FormatFindAllUser(users)
 		Return := Response.APIResponse("Succeed finding all user", UsersData)
 		Response.HandleSuccessRequest(c, Return)
 	}
@@ -92,7 +94,7 @@ func UpdateUser(c *gin.Context){
 		return
 	}
 
-	formatted := Formatter.FormatCreateUser(result)
+	formatted := UserFormatter.FormatCreateUser(result)
 	payload := Response.APIResponse("Succesfully updated user", formatted)
 	Response.HandleSuccessRequest(c, payload)
 	return

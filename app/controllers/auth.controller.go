@@ -4,10 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 	Service "invest/app/services"
 	"invest/app/utils"
+	"invest/app/utils/formatter"
 )
 
 type AuthController struct{}
 var LoginService = Service.AuthService{}
+var AuthFormatter = formatter.AuthFormatter{}
 
 func (au AuthController) Login (c *gin.Context){
 	var LoginInput utils.LoginInput
@@ -37,7 +39,7 @@ func (au AuthController) Login (c *gin.Context){
 		}); return
 	}
 
-	loginResponse := Formatter.FormatLoginReturn(user, token)
+	loginResponse := AuthFormatter.FormatLoginReturn(user, token)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Login succeed",
@@ -73,7 +75,7 @@ func (au AuthController) AdminLogin (c *gin.Context){
 		}); return
 	}
 
-	loginResponse := Formatter.FormatAdminLogin(admin, token)
+	loginResponse := AuthFormatter.FormatAdminLogin(admin, token)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Login succeed",

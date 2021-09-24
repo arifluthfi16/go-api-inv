@@ -4,11 +4,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"invest/app/services"
 	"invest/app/utils"
+	"invest/app/utils/formatter"
 )
 
 type FAQController struct {}
 
 var FAQService = services.FAQService{}
+var FAQFormatter = formatter.FAQFormatter{}
 
 func (controller *FAQController) Create(c *gin.Context){
 	var createFAQInput utils.CreateFAQInput
@@ -30,7 +32,7 @@ func (controller *FAQController) Create(c *gin.Context){
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Successfully created a new FAQ",
-		Data:    Formatter.FormatCreateFAQ(faq),
+		Data:    FAQFormatter.FormatCreateFAQ(faq),
 	})
 }
 
@@ -45,7 +47,7 @@ func (controller *FAQController) FindOneById(c *gin.Context) {
 	}
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
-		Data:    Formatter.FormatCreateFAQ(faq),
+		Data:    FAQFormatter.FormatCreateFAQ(faq),
 	})
 }
 
@@ -58,7 +60,7 @@ func (controller *FAQController) FindAll(c *gin.Context){
 			Err:     err,
 		}); return
 	}
-	FormattedList := Formatter.FormatFindAllFAQ(list)
+	FormattedList := FAQFormatter.FormatFindAllFAQ(list)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Data:    FormattedList,
@@ -112,6 +114,6 @@ func (controller *FAQController) Update(c *gin.Context){
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg : "Successfully update faq",
-		Data : Formatter.FormatCreateFAQ(result),
+		Data : FAQFormatter.FormatCreateFAQ(result),
 	})
 }

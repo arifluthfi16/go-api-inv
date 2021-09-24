@@ -4,10 +4,15 @@ import (
 	"github.com/gin-gonic/gin"
 	"invest/app/services"
 	"invest/app/utils"
+	"invest/app/utils/formatter"
 )
 
 type TransparansiController struct {}
-var TransparansiService = services.TransparansiService{}
+var (
+	TransparansiService = services.TransparansiService{}
+	TransparansiFormatter = formatter.TransparansiFormatter{}
+)
+
 
 func (controller *TransparansiController) Create(c *gin.Context){
 	var createTransparansiInput utils.CreateTransparansiInput
@@ -24,7 +29,7 @@ func (controller *TransparansiController) Create(c *gin.Context){
 		return
 	}
 
-	formatted := Formatter.FormatCreateTransparansi(tr)
+	formatted := TransparansiFormatter.FormatCreateTransparansi(tr)
 	payload := Response.APIResponse("Succesfully created a new transparansi", formatted)
 	Response.HandleSuccessRequest(c, payload)
 	return
@@ -36,7 +41,7 @@ func (controller *TransparansiController) FindOneById(c *gin.Context) {
 		FormattedErr := Response.APIResponseError("Failed to find Transparansi", err)
 		Response.HandleFailedRequest(c, FormattedErr)
 	}else{
-		TrData := Formatter.FormatCreateTransparansi(tr)
+		TrData := TransparansiFormatter.FormatCreateTransparansi(tr)
 		Return := Response.APIResponse("Transparansi found", TrData)
 		Response.HandleSuccessRequest(c, Return)
 	}
@@ -49,7 +54,7 @@ func (controller *TransparansiController) FindAll(c *gin.Context){
 		FormattedErr := Response.APIResponseError("Failed to fetch Transparansi data", err)
 		Response.HandleFailedRequest(c, FormattedErr)
 	}else{
-		FormattedData := Formatter.FormatFindAllTransparansi(list)
+		FormattedData := TransparansiFormatter.FormatFindAllTransparansi(list)
 		Return := Response.APIResponse("Succeed finding all transparansi", FormattedData)
 		Response.HandleSuccessRequest(c, Return)
 	}
@@ -91,7 +96,7 @@ func (controller *TransparansiController) Update(c *gin.Context){
 		return
 	}
 
-	formatted := Formatter.FormatCreateTransparansi(result)
+	formatted := TransparansiFormatter.FormatCreateTransparansi(result)
 	payload := Response.APIResponse("Succesfully updated Transparansi", formatted)
 	Response.HandleSuccessRequest(c, payload)
 	return

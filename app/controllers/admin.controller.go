@@ -4,12 +4,13 @@ import (
 	"github.com/gin-gonic/gin"
 	Service "invest/app/services"
 	"invest/app/utils"
+	"invest/app/utils/formatter"
 )
 
 type AdminController struct {}
 var AdminService = Service.AdminService{}
 var Response = utils.ResponseFormatter{}
-var Formatter = utils.Formatter{}
+var AdminFormatter = formatter.AdminFormatter{}
 
 func (adm AdminController) CreateAdmin(c *gin.Context) {
 	var adminInput utils.CreateAdminInput

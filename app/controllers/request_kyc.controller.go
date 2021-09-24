@@ -2,6 +2,8 @@ package controllers
 
 import (
 	"fmt"
+	"invest/app/utils/formatter"
+
 	//"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -12,6 +14,7 @@ import (
 
 type RequestKYCController struct {}
 var RequestKYCService = services.RequestKycService{}
+var RequestKYCFormatter = formatter.RequestKYCFormatter{}
 
 func (controller *RequestKYCController) Create(c *gin.Context){
 	fmt.Println(c.GetHeader("Content-Type"))
@@ -50,7 +53,7 @@ func (controller *RequestKYCController) Create(c *gin.Context){
 		}); return
 	}
 
-	formattedResponse := Formatter.FormatCreateRequestKYC(kyc)
+	formattedResponse := RequestKYCFormatter.FormatCreateRequestKYC(kyc)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Successfully created a KYC Validation REQUEST",
@@ -83,7 +86,7 @@ func (controller *RequestKYCController) FindAllKYCRequest(c *gin.Context) {
 			Err:     err,
 		})
 	}else{
-		formattedResponse := Formatter.FormatFindAllRequestKYC(list)
+		formattedResponse := RequestKYCFormatter.FormatFindAllRequestKYC(list)
 		Response.SendSuccessResponse(utils.SuccessResponseFormat{
 			Context: c,
 			Data:    formattedResponse,
@@ -130,7 +133,7 @@ func (controller *RequestKYCController) ApproveValidation (c *gin.Context){
 		}); return
 	}
 
-	formattedResponse := Formatter.FormatCreateRequestKYC(result)
+	formattedResponse := RequestKYCFormatter.FormatCreateRequestKYC(result)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Successfully approve a KYC",
@@ -167,7 +170,7 @@ func (controller *RequestKYCController) Update(c *gin.Context){
 		}); return
 	}
 
-	formattedResponse := Formatter.FormatCreateRequestKYC(result)
+	formattedResponse := RequestKYCFormatter.FormatCreateRequestKYC(result)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Successfully updated KYC data",

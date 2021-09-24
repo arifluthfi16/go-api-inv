@@ -4,10 +4,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"invest/app/services"
 	"invest/app/utils"
+	"invest/app/utils/formatter"
 )
 
 type CrowdfundController struct {}
-var CrowdfundService = services.CrowdfundService{}
+var  CrowdfundService = services.CrowdfundService{}
+var CrowdfundFormatter = formatter.CrowdfundFormatter{}
 
 func (controller *CrowdfundController) Create(c *gin.Context){
 	var createCrowdfundInput utils.CreateCrowdfundInput
@@ -31,7 +33,7 @@ func (controller *CrowdfundController) Create(c *gin.Context){
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Successfully created a new crowdfunding",
-		Data:    Formatter.FormatCreateCrowdfund(crowdfundData),
+		Data:    CrowdfundFormatter.FormatCreateCrowdfund(crowdfundData),
 	})
 }
 
@@ -44,7 +46,7 @@ func (controller *CrowdfundController) FindOneById(c *gin.Context) {
 
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
-		Data:    Formatter.FormatCreateCrowdfund(crowdfundData),
+		Data:    CrowdfundFormatter.FormatCreateCrowdfund(crowdfundData),
 	})
 }
 
@@ -58,7 +60,7 @@ func (controller *CrowdfundController) FindAll(c *gin.Context){
 		}); return
 	}
 
-	FormattedList := Formatter.FormatFindAllCrowdfunding(crowdfundingList)
+	FormattedList := CrowdfundFormatter.FormatFindAllCrowdfunding(crowdfundingList)
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Data:    FormattedList,
@@ -111,6 +113,6 @@ func (controller *CrowdfundController) Update(c *gin.Context){
 	Response.SendSuccessResponse(utils.SuccessResponseFormat{
 		Context: c,
 		Msg:     "Successfully updated a crowdfunding",
-		Data:    Formatter.FormatCreateCrowdfund(updateResult),
+		Data:    CrowdfundFormatter.FormatCreateCrowdfund(updateResult),
 	})
 }
